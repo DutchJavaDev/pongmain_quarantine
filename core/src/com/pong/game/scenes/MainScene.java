@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window.WindowStyle;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.util.dialog.OptionDialogListener;
+import com.kotcrab.vis.ui.util.dialog.Dialogs.OptionDialogType;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import com.pong.game.SceneManager;
@@ -59,11 +61,6 @@ public class MainScene implements UIScene
 		window.setResizable(false);
 		window.setMovable(false);
 		
-		final WindowStyle style = window.getStyle();
-		style.background = null;
-		
-		window.setStyle(style);
-		
 		window.setPosition(windowX, windowY);
 		
 		final VisTextButton play = new VisTextButton("   Play   ");
@@ -96,9 +93,29 @@ public class MainScene implements UIScene
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
 			{
-				Gdx.app.exit();
-				//Dialogs.showConfirmDialog(stage, title, text, buttons, returns, listener)
-				return super.touchDown(event, x, y, pointer, button);
+				
+				
+				Dialogs.showOptionDialog(stage, "Quit", "Are you sure you want to quit?", OptionDialogType.YES_NO, new OptionDialogListener()
+				{
+					@Override
+					public void yes()
+					{
+						Gdx.app.exit();
+					}
+					
+					@Override
+					public void no()
+					{
+						return;
+					}
+					
+					@Override
+					public void cancel()
+					{
+						return;
+					}
+				});
+				return false;
 			}
 		});
 		

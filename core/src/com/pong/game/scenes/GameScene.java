@@ -138,12 +138,11 @@ public class GameScene implements UIScene
 	
 	private void drawBackground()
 	{
-		Gdx.gl.glLineWidth(9);
+		Gdx.gl.glLineWidth(8);
 		shaperenderer.begin(ShapeType.Line);
 		shaperenderer.setColor(Color.WHITE);
 		shaperenderer.rect(backgroundX, backgroundY, gameWidth, gameHeight);
 		shaperenderer.end();
-		
 		
 		shaperenderer.begin(ShapeType.Filled);
 		for(int i = 0; i <= 20; i++)
